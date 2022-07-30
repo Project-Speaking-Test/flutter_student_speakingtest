@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_student_speakingtest/constants/font.dart';
+import 'interfaces/loginpage_interface.dart';
 import 'interfaces/homepage_interface.dart';
+import 'interfaces/registerpage_interface.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,9 +13,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeData(
+        textTheme: projectTextTheme
+      ),
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      // initialRoute: '/loginpage',
+      // routes: {
+      //   HomePage.nameRoute : (context) => const HomePage(),
+      //   LoginPage.nameRoute : (context) => const LoginPage(),
+      //   RegisterPage.nameRoute : (context) => const RegisterPage(),
+      // },
+      home: const LoginPage()
     );
   }
 }

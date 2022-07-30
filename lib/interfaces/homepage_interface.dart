@@ -34,6 +34,19 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Positioned(
+                top: 15,
+                right: 15,
+                child: FloatingActionButton(
+                  onPressed: (){
+
+                  },
+                  child: const Icon(Icons.person),
+                  elevation: 0,
+                  backgroundColor: const Color.fromARGB(21, 255, 255, 255),
+                  highlightElevation: 0,
+                ),
+              ),
+              Positioned(
                 left: 0,
                 right: 0,
                 bottom: 0,

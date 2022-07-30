@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../constants/color.dart';
 
-class HomePage extends StatelessWidget {
-  static const nameRoute = '/homepage';
-  const HomePage({Key? key}) : super(key: key);
+class ResultPage extends StatelessWidget {
+  static const nameRoute = '/resultpage';
+  const ResultPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +21,44 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset('assets/img/Logo Udayana.png',height: 178.28, width: 155.83),
+                    Image.asset('assets/img/Logo Udayana.png',height: 105.32, width: 92.06),
                     const SizedBox(
                       height: 20,
                     ),
                     Text(
                       "SPEAKING TEST",
                       style: Theme.of(context).textTheme.headline1,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      width: 290,
+                      height: 300,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                        color: Colors.white
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('assets/img/cracker.png'),
+                          const SizedBox(
+                            height: 23,
+                          ),
+                          Text(
+                            "YOU HAVE COMPLETED",
+                            style: Theme.of(context).textTheme.headline4?.apply(color: secondaryColor),
+                          ),
+                          Text(
+                            "THE TEST",
+                            style: Theme.of(context).textTheme.headline4?.apply(color: secondaryColor),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 0.17 *size.height,
                     )
                   ],
                 ),
@@ -53,10 +84,10 @@ class HomePage extends StatelessWidget {
               child: Container(
                 height: 0.2* size.height,
                 decoration: BoxDecoration(
-                  color: secondaryBackgroundColor,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(50)
-                  )
+                    color: secondaryBackgroundColor,
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(50)
+                    )
                 ),
                 child: Center(
                   child: Container(
@@ -73,8 +104,8 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(100)),
-                      gradient: backgroundColor
+                        borderRadius: const BorderRadius.all(Radius.circular(100)),
+                        gradient: backgroundColor
                     ),
                   ),
                 ),

@@ -10,3 +10,4 @@ var backgroundColor = const LinearGradient(
 );
 var secondaryBackgroundColor = const Color(0xffF8F8F8);
 var borderColor = const Color(0xff2E5DA4);
+var secondaryColor =const Color(0xff2393E2);

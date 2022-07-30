@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_student_speakingtest/interfaces/loginpage_interface.dart';
 
 import '../constants/color.dart';
 import 'homepage_interface.dart';
@@ -25,7 +24,7 @@ class RegisterPage extends StatelessWidget {
                       const SizedBox(
                         height: 30,
                       ),
-                      Container(child: Image.asset('assets/img/Logo Udayana.png', height: 119.45, width: 104.4,)),
+                      Image.asset('assets/img/Logo Udayana.png', height: 119.45, width: 104.4,),
                       const SizedBox(
                         height: 20,
                       ),
@@ -182,21 +181,21 @@ class RegisterPage extends StatelessWidget {
                           ),
                         ),
                         decoration: BoxDecoration(
-                          borderRadius : const BorderRadius.all(Radius.circular(20)),
+                          borderRadius : const BorderRadius.all(Radius.circular(100)),
                           gradient: backgroundColor,
                         ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             "Already have account?"
                           ),
                           TextButton(
                             onPressed: (){
                               Navigator.of(context).pop();
                             },
-                            child: Text(
+                            child: const Text(
                               "LOGIN",
                             ),
                           )

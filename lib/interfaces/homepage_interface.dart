@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(child: Image.asset('assets/img/Logo Udayana.png'), height: 178.28, width: 155.83,),
+                      Image.asset('assets/img/Logo Udayana.png',height: 178.28, width: 155.83),
                       const SizedBox(
                         height: 20,
                       ),
@@ -44,6 +44,25 @@ class HomePage extends StatelessWidget {
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(50),
                       )
+                  ),
+                  child: Center(
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 27),
+                      padding: const EdgeInsets.all(5),
+                      width: 10000,
+                      child: TextButton(
+                        onPressed: (){
+                        },
+                        child: Text(
+                          "START",
+                          style: Theme.of(context).textTheme.headline1?.apply(letterSpacingDelta: 0, letterSpacingFactor: 0),
+                        ),
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius : const BorderRadius.all(Radius.circular(100)),
+                        gradient: backgroundColor,
+                      ),
+                    ),
                   ),
                 ),
               )

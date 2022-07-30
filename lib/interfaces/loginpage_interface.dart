@@ -25,7 +25,7 @@ class LoginPage extends StatelessWidget {
                     const SizedBox(
                       height: 30,
                     ),
-                    Container(child: Image.asset('assets/img/Logo Udayana.png', height: 119.45, width: 104.4,)),
+                    Image.asset('assets/img/Logo Udayana.png', height: 119.45, width: 104.4,),
                     const SizedBox(
                       height: 20,
                     ),
@@ -146,7 +146,7 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       decoration: BoxDecoration(
-                        borderRadius : const BorderRadius.all(Radius.circular(20)),
+                        borderRadius : const BorderRadius.all(Radius.circular(100)),
                         gradient: backgroundColor,
                       ),
                     ),
@@ -166,7 +166,7 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       decoration: BoxDecoration(
-                        borderRadius : BorderRadius.all(Radius.circular(20)),
+                        borderRadius : const BorderRadius.all(Radius.circular(100)),
                         border: Border.all(
                           color: borderColor,
                           width: 3,

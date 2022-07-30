@@ -18,12 +18,12 @@ class MyApp extends StatelessWidget {
         textTheme: projectTextTheme
       ),
       debugShowCheckedModeBanner: false,
-      // initialRoute: '/loginpage',
-      // routes: {
-      //   HomePage.nameRoute : (context) => const HomePage(),
-      //   LoginPage.nameRoute : (context) => const LoginPage(),
-      //   RegisterPage.nameRoute : (context) => const RegisterPage(),
-      // },
+      initialRoute: '/loginpage',
+      routes: {
+        HomePage.nameRoute : (context) => const HomePage(),
+        LoginPage.nameRoute : (context) => const LoginPage(),
+        RegisterPage.nameRoute : (context) => const RegisterPage(),
+      },
       home: const LoginPage()
     );
   }

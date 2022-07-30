@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_student_speakingtest/constants/color.dart';
+import 'package:flutter_student_speakingtest/interfaces/registerpage_interface.dart';
+
+import 'homepage_interface.dart';
 
 class LoginPage extends StatelessWidget {
   static const nameRoute = '/loginpage';
@@ -19,14 +22,12 @@ class LoginPage extends StatelessWidget {
               child: Center(
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 50,
-                    ),
-                    Container(
-                      child: Image.asset('assets/img/Logo Udayana.png'),
-                    ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
+                    ),
+                    Container(child: Image.asset('assets/img/Logo Udayana.png', height: 119.45, width: 104.4,)),
+                    const SizedBox(
+                      height: 20,
                     ),
                     Text(
                       "SPEAKING TEST",
@@ -41,7 +42,7 @@ class LoginPage extends StatelessWidget {
               right: 0,
               bottom: 0,
               child: Container(
-                height: 0.58 * size.height,
+                height: 0.62 * size.height,
                 decoration: BoxDecoration(
                   color: secondaryBackgroundColor,
                   borderRadius: const BorderRadius.only(
@@ -81,7 +82,7 @@ class LoginPage extends StatelessWidget {
                         ],
                       ),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        borderRadius: const BorderRadius.all(Radius.circular(20)),
                         color: Colors.white,
                         boxShadow: [
                           BoxShadow(
@@ -94,7 +95,7 @@ class LoginPage extends StatelessWidget {
 
                     ),
                     const SizedBox(
-                      height: 12,
+                      height: 17,
                     ),
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 27),
@@ -118,7 +119,7 @@ class LoginPage extends StatelessWidget {
                         ],
                       ),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderRadius: const BorderRadius.all(Radius.circular(20)),
                           color: Colors.white,
                           boxShadow: [
                             BoxShadow(
@@ -129,15 +130,15 @@ class LoginPage extends StatelessWidget {
                           ]
                       ),
                     ),
-                    SizedBox(
-                      height: 12,
+                    const SizedBox(
+                      height: 17,
                     ),
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 27),
                       width: 10000,
                       child: TextButton(
                         onPressed: (){
-
+                          Navigator.of(context).pushReplacementNamed(HomePage.nameRoute);
                         },
                         child: Text(
                           "LOGIN",
@@ -145,19 +146,19 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       decoration: BoxDecoration(
-                        borderRadius : BorderRadius.all(Radius.circular(20)),
+                        borderRadius : const BorderRadius.all(Radius.circular(20)),
                         gradient: backgroundColor,
                       ),
                     ),
-                    SizedBox(
-                      height: 12,
+                    const SizedBox(
+                      height: 17,
                     ),
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 27),
                       width: 10000,
                       child: TextButton(
                         onPressed: (){
-
+                          Navigator.of(context).pushNamed(RegisterPage.nameRoute);
                         },
                         child: Text(
                           "Register",
@@ -172,8 +173,6 @@ class LoginPage extends StatelessWidget {
                         )
                       ),
                     ),
-
-
                   ],
                 ),
               ),

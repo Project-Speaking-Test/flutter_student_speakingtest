@@ -14,7 +14,7 @@ class ResultPage extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                gradient: backgroundColor
+                gradient: gradientBackgroundColor
               ),
               child: Center(
                 child: Column(
@@ -41,7 +41,7 @@ class ResultPage extends StatelessWidget {
               child: Container(
                 height: 0.62 * size.height,
                 decoration: BoxDecoration(
-                  color: secondaryBackgroundColor,
+                  color: backgroundColor,
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(50),
                   ),

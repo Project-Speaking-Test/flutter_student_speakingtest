@@ -16,7 +16,7 @@ class RegisterPage extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                    gradient: backgroundColor
+                    gradient: gradientBackgroundColor
                 ),
                 child: Center(
                   child: Column(
@@ -43,7 +43,7 @@ class RegisterPage extends StatelessWidget {
                 child: Container(
                   height: 0.62 * size.height,
                   decoration: BoxDecoration(
-                      color: secondaryBackgroundColor,
+                      color: backgroundColor,
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(50),
                       )
@@ -182,7 +182,7 @@ class RegisterPage extends StatelessWidget {
                         ),
                         decoration: BoxDecoration(
                           borderRadius : const BorderRadius.all(Radius.circular(100)),
-                          gradient: backgroundColor,
+                          gradient: gradientBackgroundColor,
                         ),
                       ),
                       Row(

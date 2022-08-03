@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_student_speakingtest/constants/font.dart';
 import 'package:flutter_student_speakingtest/interfaces/completepage_interface.dart';
 import 'interfaces/loginpage_interface.dart';
 import 'interfaces/homepage_interface.dart';
@@ -16,9 +15,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        textTheme: projectTextTheme
-      ),
       debugShowCheckedModeBanner: false,
       initialRoute: '/loginpage',
       routes: {
@@ -26,6 +22,7 @@ class MyApp extends StatelessWidget {
         LoginPage.nameRoute : (context) => const LoginPage(),
         RegisterPage.nameRoute : (context) => const RegisterPage(),
         CompletePage.nameRoute : (context) => const CompletePage(),
+        ResultPage.nameRoute : (context) => const ResultPage(),
       },
       home: const LoginPage()
     );

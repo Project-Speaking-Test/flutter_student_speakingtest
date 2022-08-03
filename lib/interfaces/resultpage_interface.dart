@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_student_speakingtest/constants/color.dart';
+import 'package:flutter_student_speakingtest/constants/font.dart';
 
 class ResultPage extends StatelessWidget {
   static const nameRoute = '/resultpage';
@@ -19,8 +20,8 @@ class ResultPage extends StatelessWidget {
               child: Center(
                 child: Column(
                   children: [
-                    const SizedBox(
-                      height: 30,
+                    SizedBox(
+                      height: 0.05 * size.height,
                     ),
                     Image.asset('assets/img/Logo Udayana.png', height: 119.45, width: 104.4,),
                     const SizedBox(
@@ -28,7 +29,7 @@ class ResultPage extends StatelessWidget {
                     ),
                     Text(
                       "SPEAKING TEST",
-                      style: Theme.of(context).textTheme.headline1,
+                      style: headlineMain1,
                     )
                   ],
                 ),

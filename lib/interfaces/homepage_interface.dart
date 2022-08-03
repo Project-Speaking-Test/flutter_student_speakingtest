@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_student_speakingtest/constants/font.dart';
+import 'package:flutter_student_speakingtest/interfaces/resultpage_interface.dart';
 
 import '../constants/color.dart';
 
@@ -27,7 +29,7 @@ class HomePage extends StatelessWidget {
                     ),
                     Text(
                       "SPEAKING TEST",
-                      style: Theme.of(context).textTheme.headline1,
+                      style: headlineMain1,
                     )
                   ],
                 ),
@@ -65,11 +67,11 @@ class HomePage extends StatelessWidget {
                     width: 100000,
                     child: TextButton(
                       onPressed: (){
-
+                        Navigator.of(context).pushNamed(ResultPage.nameRoute);
                       },
                       child: Text(
                         "START",
-                        style: Theme.of(context).textTheme.headline1?.apply(letterSpacingDelta: 0, letterSpacingFactor: 0),
+                        style: button3,
                       ),
                     ),
                     decoration: BoxDecoration(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_student_speakingtest/constants/font.dart';
 
 import '../constants/color.dart';
 
@@ -27,7 +28,7 @@ class CompletePage extends StatelessWidget {
                     ),
                     Text(
                       "SPEAKING TEST",
-                      style: Theme.of(context).textTheme.headline1,
+                      style: headlineMain1,
                     ),
                     const SizedBox(
                       height: 20,
@@ -48,11 +49,11 @@ class CompletePage extends StatelessWidget {
                           ),
                           Text(
                             "YOU HAVE COMPLETED",
-                            style: Theme.of(context).textTheme.headline4?.apply(color: secondaryColor),
+                            style: completeFont,
                           ),
                           Text(
                             "THE TEST",
-                            style: Theme.of(context).textTheme.headline4?.apply(color: secondaryColor),
+                            style: completeFont,
                           )
                         ],
                       ),
@@ -99,8 +100,8 @@ class CompletePage extends StatelessWidget {
 
                       },
                       child: Text(
-                        "START",
-                        style: Theme.of(context).textTheme.headline1?.apply(letterSpacingDelta: 0, letterSpacingFactor: 0),
+                        "RESULT",
+                        style: button3,
                       ),
                     ),
                     decoration: BoxDecoration(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_student_speakingtest/constants/color.dart';
+import 'package:flutter_student_speakingtest/constants/font.dart';
 import 'package:flutter_student_speakingtest/interfaces/registerpage_interface.dart';
 
 import 'homepage_interface.dart';
@@ -22,8 +23,8 @@ class LoginPage extends StatelessWidget {
               child: Center(
                 child: Column(
                   children: [
-                    const SizedBox(
-                      height: 30,
+                    SizedBox(
+                      height: 0.05 * size.height,
                     ),
                     Image.asset('assets/img/Logo Udayana.png', height: 119.45, width: 104.4,),
                     const SizedBox(
@@ -31,7 +32,7 @@ class LoginPage extends StatelessWidget {
                     ),
                     Text(
                       "SPEAKING TEST",
-                      style: Theme.of(context).textTheme.headline1,
+                      style: headlineMain1,
                     )
                   ],
                 ),
@@ -56,7 +57,7 @@ class LoginPage extends StatelessWidget {
                     ),
                     Text(
                       "Login",
-                      style: Theme.of(context).textTheme.headline2,
+                      style: headlineTitle1,
                     ),
                     const SizedBox(
                       height: 27,
@@ -69,14 +70,14 @@ class LoginPage extends StatelessWidget {
                         children: [
                           Text(
                             "Username",
-                            style: Theme.of(context).textTheme.headline3,
+                            style: headlineHint,
                           ),
                           TextFormField(
                             decoration: InputDecoration(
                               focusedBorder: InputBorder.none,
                               enabledBorder: InputBorder.none,
                               hintText: 'userspeak@mail.com',
-                              hintStyle: Theme.of(context).textTheme.headline5,
+                              hintStyle: hintText,
                             ),
                           )
                         ],
@@ -105,7 +106,7 @@ class LoginPage extends StatelessWidget {
                         children: [
                           Text(
                             "Password",
-                            style: Theme.of(context).textTheme.headline3,
+                            style: headlineHint,
                           ),
                           TextFormField(
                             obscureText: true,
@@ -113,7 +114,7 @@ class LoginPage extends StatelessWidget {
                               focusedBorder: InputBorder.none,
                               enabledBorder: InputBorder.none,
                               hintText: '* * * * * * * * * * * ',
-                              hintStyle: Theme.of(context).textTheme.headline5,
+                              hintStyle: hintText,
                             ),
                           )
                         ],
@@ -142,7 +143,7 @@ class LoginPage extends StatelessWidget {
                         },
                         child: Text(
                           "LOGIN",
-                          style: Theme.of(context).textTheme.headline4,
+                          style: button1,
                         ),
                       ),
                       decoration: BoxDecoration(
@@ -162,7 +163,7 @@ class LoginPage extends StatelessWidget {
                         },
                         child: Text(
                           "Register",
-                          style: Theme.of(context).textTheme.headline4?.apply(color: borderColor),
+                          style: button2,
                         ),
                       ),
                       decoration: BoxDecoration(

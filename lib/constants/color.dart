@@ -11,3 +11,6 @@ var gradientBackgroundColor = const LinearGradient(
 var backgroundColor = const Color(0xffF8F8F8);
 var borderColor = const Color(0xff2E5DA4);
 var secondaryColor =const Color(0xff2393E2);
+var buttonSecondaryColor = const Color(0xFF305297);
+var hintTextColor = const Color (0xFFBCBCBC);
+var greyscale = const Color (0xFF828282);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_student_speakingtest/constants/font.dart';
 
 import '../constants/color.dart';
 import 'homepage_interface.dart';
@@ -21,8 +22,8 @@ class RegisterPage extends StatelessWidget {
                 child: Center(
                   child: Column(
                     children: [
-                      const SizedBox(
-                        height: 30,
+                      SizedBox(
+                        height: 0.05 * size.height,
                       ),
                       Image.asset('assets/img/Logo Udayana.png', height: 119.45, width: 104.4,),
                       const SizedBox(
@@ -30,7 +31,7 @@ class RegisterPage extends StatelessWidget {
                       ),
                       Text(
                         "SPEAKING TEST",
-                        style: Theme.of(context).textTheme.headline1,
+                        style: headlineMain1,
                       )
                     ],
                   ),
@@ -55,7 +56,7 @@ class RegisterPage extends StatelessWidget {
                       ),
                       Text(
                         "Register",
-                        style: Theme.of(context).textTheme.headline1?.apply(color: Colors.black, letterSpacingDelta: 0, letterSpacingFactor: 0),
+                        style: headlineTitle2,
                       ),
                       const SizedBox(
                         height: 25,
@@ -68,14 +69,14 @@ class RegisterPage extends StatelessWidget {
                           children: [
                             Text(
                               "Nama Student",
-                              style: Theme.of(context).textTheme.headline3,
+                              style: headlineHint,
                             ),
                             TextFormField(
                               decoration: InputDecoration(
                                 focusedBorder: InputBorder.none,
                                 enabledBorder: InputBorder.none,
                                 hintText: 'John Doe',
-                                hintStyle: Theme.of(context).textTheme.headline5,
+                                hintStyle: hintText,
                               ),
                             )
                           ],
@@ -104,14 +105,14 @@ class RegisterPage extends StatelessWidget {
                           children: [
                             Text(
                               "Username",
-                              style: Theme.of(context).textTheme.headline3,
+                              style: headlineHint,
                             ),
                             TextFormField(
                               decoration: InputDecoration(
                                 focusedBorder: InputBorder.none,
                                 enabledBorder: InputBorder.none,
                                 hintText: 'userspeak@mail.com',
-                                hintStyle: Theme.of(context).textTheme.headline5,
+                                hintStyle: hintText,
                               ),
                             )
                           ],
@@ -140,7 +141,7 @@ class RegisterPage extends StatelessWidget {
                           children: [
                             Text(
                               "Password",
-                              style: Theme.of(context).textTheme.headline3,
+                              style: headlineHint,
                             ),
                             TextFormField(
                               obscureText: true,
@@ -148,7 +149,7 @@ class RegisterPage extends StatelessWidget {
                                 focusedBorder: InputBorder.none,
                                 enabledBorder: InputBorder.none,
                                 hintText: '* * * * * * * * * * * ',
-                                hintStyle: Theme.of(context).textTheme.headline5,
+                                hintStyle: hintText,
                               ),
                             )
                           ],
@@ -177,7 +178,7 @@ class RegisterPage extends StatelessWidget {
                           },
                           child: Text(
                             "REGISTER",
-                            style: Theme.of(context).textTheme.headline4,
+                            style: button1,
                           ),
                         ),
                         decoration: BoxDecoration(
@@ -188,15 +189,17 @@ class RegisterPage extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
-                            "Already have account?"
+                          Text(
+                            "Already have account?",
+                            style: bodyLoginQuestion,
                           ),
                           TextButton(
                             onPressed: (){
                               Navigator.of(context).pop();
                             },
-                            child: const Text(
+                            child: Text(
                               "LOGIN",
+                              style: buttonLoginQuestion,
                             ),
                           )
                         ],

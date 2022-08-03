@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../constants/color.dart';
-import '../constants/font.dart';
+import 'color.dart';
+import 'font.dart';
 
-class ResultPage extends StatelessWidget {
+class Template extends StatelessWidget {
   static const nameRoute = '/resultpage';
-  const ResultPage({Key? key}) : super(key: key);
+  const Template({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class ResultPage extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                gradient: gradientBackgroundColor
+                  gradient: gradientBackgroundColor
               ),
               child: Center(
                 child: Column(

@@ -4,6 +4,7 @@ import 'interfaces/loginpage_interface.dart';
 import 'interfaces/homepage_interface.dart';
 import 'interfaces/registerpage_interface.dart';
 import 'interfaces/resultpage_interface.dart';
+import 'interfaces/testpage_interface.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         RegisterPage.nameRoute : (context) => const RegisterPage(),
         CompletePage.nameRoute : (context) => const CompletePage(),
         ResultPage.nameRoute : (context) => const ResultPage(),
+        TestPage.nameRoute : (context) => const TestPage(),
       },
       home: const LoginPage()
     );

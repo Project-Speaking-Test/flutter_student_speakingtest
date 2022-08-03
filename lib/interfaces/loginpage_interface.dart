@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_student_speakingtest/constants/color.dart';
-import 'package:flutter_student_speakingtest/constants/font.dart';
-import 'package:flutter_student_speakingtest/interfaces/registerpage_interface.dart';
+import '../constants/color.dart';
+import '../constants/font.dart';
+import 'registerpage_interface.dart';
 
 import 'homepage_interface.dart';
 

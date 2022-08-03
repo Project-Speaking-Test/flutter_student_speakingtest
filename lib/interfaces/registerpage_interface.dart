@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_student_speakingtest/constants/font.dart';
-
+import '../constants/font.dart';
 import '../constants/color.dart';
 import 'homepage_interface.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_student_speakingtest/constants/font.dart';
-import 'package:flutter_student_speakingtest/interfaces/resultpage_interface.dart';
+import '../constants/font.dart';
+import 'testpage_interface.dart';
 
 import '../constants/color.dart';
 
@@ -67,7 +67,7 @@ class HomePage extends StatelessWidget {
                     width: 100000,
                     child: TextButton(
                       onPressed: (){
-                        Navigator.of(context).pushNamed(ResultPage.nameRoute);
+                        Navigator.of(context).pushReplacementNamed(TestPage.nameRoute);
                       },
                       child: Text(
                         "START",

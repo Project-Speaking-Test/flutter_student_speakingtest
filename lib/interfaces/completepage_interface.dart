@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_student_speakingtest/constants/font.dart';
+import '../constants/font.dart';
+import 'resultpage_interface.dart';
 
 import '../constants/color.dart';
 
@@ -97,7 +98,7 @@ class CompletePage extends StatelessWidget {
                     width: 100000,
                     child: TextButton(
                       onPressed: (){
-
+                        Navigator.of(context).pushReplacementNamed(ResultPage.nameRoute);
                       },
                       child: Text(
                         "RESULT",

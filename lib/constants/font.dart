@@ -19,6 +19,7 @@ var headlineMain2 = GoogleFonts.openSans( //Use for reduce size main title
       fontSize: 18,
       fontWeight: FontWeight.bold,
       color: Colors.white,
+      letterSpacing: 4
     )
 );
 //headline for standard title
@@ -128,7 +129,7 @@ var questionFont = GoogleFonts.openSans(//Use for Question in tes page
     textStyle: const TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.normal,
-        color: Colors.black
+        color: Colors.white
     )
 );
 var scoreFont = GoogleFonts.openSans(

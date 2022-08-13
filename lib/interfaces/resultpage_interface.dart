@@ -36,6 +36,19 @@ class ResultPage extends StatelessWidget {
               ),
             ),
             Positioned(
+              top: 15,
+              right: 15,
+              child: FloatingActionButton(
+                onPressed: (){
+
+                },
+                child: const Icon(Icons.person),
+                elevation: 0,
+                backgroundColor: const Color.fromARGB(21, 255, 255, 255),
+                highlightElevation: 0,
+              ),
+            ),
+            Positioned(
               left: 0,
               bottom: 0,
               right: 0,
@@ -49,7 +62,49 @@ class ResultPage extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Result",
+                      style: headlineTitle2,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Data",
+                          style: headlineDatePicker,
+                        ),
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Container(
+                          width: 0.65 * size.width,
+                          height: 35,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.grey,
+                              width: 1.5
+                            ),
+                            borderRadius: BorderRadius.all(Radius.circular(20))
+                          ),
+                          child: Row(
 
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 17,
+                    ),
+                    Text(
+                      "Student : John Doe",
+                      style: headlineName,
+                    ),
                   ],
                 ),
               ),

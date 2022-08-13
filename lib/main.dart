@@ -17,16 +17,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/loginpage',
-      routes: {
-        HomePage.nameRoute : (context) => const HomePage(),
-        LoginPage.nameRoute : (context) => const LoginPage(),
-        RegisterPage.nameRoute : (context) => const RegisterPage(),
-        CompletePage.nameRoute : (context) => const CompletePage(),
-        ResultPage.nameRoute : (context) => const ResultPage(),
-        TestPage.nameRoute : (context) => const TestPage(),
-      },
-      home: const LoginPage()
+      // initialRoute: '/loginpage',
+      // routes: {
+      //   HomePage.nameRoute : (context) => const HomePage(),
+      //   LoginPage.nameRoute : (context) => const LoginPage(),
+      //   RegisterPage.nameRoute : (context) => const RegisterPage(),
+      //   CompletePage.nameRoute : (context) => const CompletePage(),
+      //   ResultPage.nameRoute : (context) => const ResultPage(),
+      //   TestPage.nameRoute : (context) => const TestPage(),
+      // },
+      home: const ResultPage()
     );
   }
 }

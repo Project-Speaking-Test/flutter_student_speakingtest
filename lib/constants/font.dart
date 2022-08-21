@@ -83,7 +83,7 @@ var headlineName = GoogleFonts.openSans(//Use for student name headline result
 var headlineMini = GoogleFonts.openSans(//Use for mini headline
     textStyle: const TextStyle(
         fontSize: 10,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.w500,
         color: Colors.black
     )
 );
@@ -156,8 +156,15 @@ var dateFont = GoogleFonts.openSans(
 var timeFont = GoogleFonts.openSans(
     textStyle: TextStyle(
         fontSize: 16,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.w700,
         color: greyscale
+    )
+);
+var pickerDateFont = GoogleFonts.openSans(
+    textStyle: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w700,
+        color: dividerColor
     )
 );
 

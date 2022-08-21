@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import '../constants/color.dart';
 import '../constants/font.dart';
@@ -12,7 +14,42 @@ class TestPage extends StatefulWidget {
 }
 
 class _TestPageState extends State<TestPage> {
+
   var _counter = 1;
+
+  late Timer _timer;
+  int _intialStart =3;
+  int _start = 3;
+
+  startTimer (){
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(
+      oneSec,
+          (Timer timer) {
+        if (_start == 0) {
+          setState(() {
+            if(_counter ==10){
+              timer.cancel();
+              Navigator.of(context).pushReplacementNamed(CompletePage.nameRoute);
+            }else{
+              _counter++;
+              _start =_intialStart;
+            }
+          });
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
+  }
+  @override
+  void initState() {
+    startTimer();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -74,6 +111,12 @@ class _TestPageState extends State<TestPage> {
                               color: timerBorderColor
                             )
                           ),
+                          child: Center(
+                            child: Text(
+                              "$_start",
+                              style: bodyQuestionAtributes,
+                            ),
+                          ),
                         )
                       ],
                     ),
@@ -111,14 +154,7 @@ class _TestPageState extends State<TestPage> {
                   child: FloatingActionButton(
                     child: Icon(Icons.mic),
                     onPressed: (){
-                      if(_counter == 10){
-                        Navigator.of(context).pushReplacementNamed(CompletePage.nameRoute);
-                      }else{
-                        setState(() {
-                          _counter++;
-                        });
-                        print(_counter);
-                      }
+
                     },
                   ),
                 )
@@ -130,3 +166,5 @@ class _TestPageState extends State<TestPage> {
     );
   }
 }
+
+

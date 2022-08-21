@@ -15,3 +15,4 @@ var buttonSecondaryColor = const Color(0xFF305297);
 var hintTextColor = const Color (0xFFBCBCBC);
 var greyscale = const Color (0xFF828282);
 var timerBorderColor = const Color(0xffffffff);
+var dividerColor = const Color(0xFFC5C5C5);

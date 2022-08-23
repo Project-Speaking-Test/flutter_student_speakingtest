@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         TestPage.nameRoute : (context) => const TestPage(),
         TestResultPage.nameRoute : (context) => const TestResultPage()
       },
-      home: const LoginPage()
+      home: CompletePage()
     );
   }
 }

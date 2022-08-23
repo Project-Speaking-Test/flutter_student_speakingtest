@@ -101,7 +101,7 @@ class CompletePage extends StatelessWidget {
                         Navigator.of(context).pushReplacementNamed(ResultPage.nameRoute);
                       },
                       child: Text(
-                        "RESULT",
+                        "SUBMIT",
                         style: button3,
                       ),
                     ),

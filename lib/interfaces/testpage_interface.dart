@@ -18,7 +18,7 @@ class _TestPageState extends State<TestPage> {
   var _counter = 1;
 
   late Timer _timer;
-  int _intialStart =3;
+  final int _intialStart =3;
   int _start = 3;
 
   startTimer (){

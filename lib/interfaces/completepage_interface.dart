@@ -1,12 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/font.dart';
+import 'dialog_interfaces.dart';
+import 'loginpage_interface.dart';
 import 'resultpage_interface.dart';
 
 import '../constants/color.dart';
 
-class CompletePage extends StatelessWidget {
+class CompletePage extends StatefulWidget {
   static const nameRoute = '/completepage';
   const CompletePage({Key? key}) : super(key: key);
+
+  @override
+  State<CompletePage> createState() => _CompletePageState();
+}
+
+class _CompletePageState extends State<CompletePage> {
+
+  late SharedPreferences sharedPreferences;
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus();
+  }
+
+  checkLoginStatus () async{
+
+    sharedPreferences = await SharedPreferences.getInstance();
+    if (sharedPreferences.getString('token')==null){
+      Navigator.of(context).pushReplacementNamed(LoginPage.nameRoute);
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,15 +95,35 @@ class CompletePage extends StatelessWidget {
             Positioned(
               top: 15,
               right: 15,
-              child: FloatingActionButton(
-                onPressed: (){
-
+              child: PopupMenuButton(
+                icon: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                ),
+                itemBuilder: (context) {
+                  return [
+                    PopupMenuItem(
+                      child: Text('Log Out'),
+                      value: 1,
+                    )
+                  ];
                 },
-                child: const Icon(Icons.person),
-                elevation: 0,
-                backgroundColor: const Color.fromARGB(21, 255, 255, 255),
-                highlightElevation: 0,
+                onSelected: (value) {
+                  if (value == 1) {
+                    showDialog(
+                        context: context, builder: (context) => DialogLogOut(sharedPreferences: sharedPreferences,));
+                  }
+                },
               ),
+              // child: FloatingActionButton(
+              //   onPressed: (){
+              //
+              //   },
+              //   child: const Icon(Icons.person),
+              //   elevation: 0,
+              //   backgroundColor: const Color.fromARGB(21, 255, 255, 255),
+              //   highlightElevation: 0,
+              // ),
             ),
             Positioned(
               left: 0,

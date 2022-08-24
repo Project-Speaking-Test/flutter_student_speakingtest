@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_student_speakingtest/interfaces/testresultpage_interface.dart';
+import '../interfaces/testresultpage_interface.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/color.dart';
 import '../constants/font.dart';
+import 'dialog_interfaces.dart';
+import 'loginpage_interface.dart';
 
 class ResultPage extends StatefulWidget {
   static const nameRoute = '/resultpage';
 
-  ResultPage({Key? key}) : super(key: key);
+  const ResultPage({Key? key}) : super(key: key);
 
   @override
   State<ResultPage> createState() => _ResultPageState();
@@ -15,6 +18,22 @@ class ResultPage extends StatefulWidget {
 
 class _ResultPageState extends State<ResultPage> {
   DateTime _dateTime = DateTime.now();
+  late SharedPreferences sharedPreferences;
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoginStatus();
+  }
+
+  checkLoginStatus () async{
+
+    sharedPreferences = await SharedPreferences.getInstance();
+    if (sharedPreferences.getString('token')==null){
+      Navigator.of(context).pushReplacementNamed(LoginPage.nameRoute);
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,12 +71,25 @@ class _ResultPageState extends State<ResultPage> {
             Positioned(
               top: 15,
               right: 15,
-              child: FloatingActionButton(
-                onPressed: () {},
-                child: const Icon(Icons.person),
-                elevation: 0,
-                backgroundColor: const Color.fromARGB(21, 255, 255, 255),
-                highlightElevation: 0,
+              child: PopupMenuButton(
+                icon:  Icon(
+                  Icons.person,
+                  color: Colors.white,
+                ),
+                itemBuilder: (context) {
+                  return [
+                    PopupMenuItem(
+                      child: Text('Log Out'),
+                      value: 1,
+                    )
+                  ];
+                },
+                onSelected: (value) {
+                  if (value == 1) {
+                    showDialog(
+                        context: context, builder: (context) => DialogLogOut(sharedPreferences: sharedPreferences,));
+                  }
+                },
               ),
             ),
             Positioned(

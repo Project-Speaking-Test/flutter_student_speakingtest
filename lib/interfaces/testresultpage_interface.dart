@@ -12,6 +12,18 @@ class TestResultPage extends StatefulWidget {
 
 class _TestResultPageState extends State<TestResultPage> {
   var _counter = 1;
+  List<String> question = [
+    "Why do you think learning English is very important?",
+    "Question 2",
+    "Question 3",
+    "Question 4",
+    "Question 5",
+    "Question 6",
+    "Question 7",
+    "Question 8",
+    "Question 9",
+    "Question 10",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +149,7 @@ class _TestResultPageState extends State<TestResultPage> {
                             height: 100,
                             child: Center(
                               child: Text(
-                                "Why do you think learning English is very important?",
+                                "${question[_counter-1]}",
                                 style: headlineResultQuestion,
                                 textAlign: TextAlign.center,
                               ),

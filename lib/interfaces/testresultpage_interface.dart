@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../constants/color.dart';
 import '../constants/font.dart';
+import '../models/question_model.dart';
 
 class TestResultPage extends StatefulWidget {
   static const nameRoute = '/testresultpage';
@@ -12,18 +13,6 @@ class TestResultPage extends StatefulWidget {
 
 class _TestResultPageState extends State<TestResultPage> {
   var _counter = 1;
-  List<String> question = [
-    "Why do you think learning English is very important?",
-    "Question 2",
-    "Question 3",
-    "Question 4",
-    "Question 5",
-    "Question 6",
-    "Question 7",
-    "Question 8",
-    "Question 9",
-    "Question 10",
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -148,10 +137,24 @@ class _TestResultPageState extends State<TestResultPage> {
                             width: 300,
                             height: 100,
                             child: Center(
-                              child: Text(
-                                "${question[_counter-1]}",
-                                style: headlineResultQuestion,
-                                textAlign: TextAlign.center,
+                              child: FutureBuilder(
+                                future: getQuestion(),
+                                builder: (BuildContext context, AsyncSnapshot snapshot){
+                                  if (snapshot.data == null){
+                                    return Container(
+                                      child: Center(
+                                        child: Text("Loading"),
+                                      ),
+                                    );
+                                  }else{
+                                    // questionItem =snapshot.data[_counter-1].question;
+                                    return Text(
+                                      snapshot.data[_counter-1].question,
+                                      style: headlineResultQuestion,
+                                      textAlign: TextAlign.center,
+                                    );
+                                  }
+                                },
                               ),
                             ),
                           ),

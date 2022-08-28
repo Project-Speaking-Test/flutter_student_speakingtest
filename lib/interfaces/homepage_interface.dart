@@ -82,6 +82,7 @@ class _HomePageState extends State<HomePage> {
                 },
                 onSelected: (value) {
                   if (value == 1) {
+                    print('Lokal token : ${sharedPreferences.getString('token')}');
                     showDialog(
                         context: context, builder: (context) => DialogLogOut(sharedPreferences: sharedPreferences,));
                   }

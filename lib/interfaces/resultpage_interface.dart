@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/color.dart';
 import '../constants/font.dart';
+import '../models/student_filter.dart';
 import 'dialog_interfaces.dart';
 import 'loginpage_interface.dart';
 
@@ -19,6 +20,7 @@ class ResultPage extends StatefulWidget {
 class _ResultPageState extends State<ResultPage> {
   DateTime _dateTime = DateTime.now();
   late SharedPreferences sharedPreferences;
+  String name = 'loading';
 
   @override
   void initState() {
@@ -27,8 +29,8 @@ class _ResultPageState extends State<ResultPage> {
   }
 
   checkLoginStatus () async{
-
     sharedPreferences = await SharedPreferences.getInstance();
+    name = sharedPreferences.getString('name').toString();
     if (sharedPreferences.getString('token')==null){
       Navigator.of(context).pushReplacementNamed(LoginPage.nameRoute);
     }
@@ -38,6 +40,7 @@ class _ResultPageState extends State<ResultPage> {
   @override
   Widget build(BuildContext context) {
     String formattedDate = DateFormat('d MMM yyyy').format(_dateTime);
+    String formatFilterDate = DateFormat('yyyy-MM-d').format(_dateTime);
 
     Size size = MediaQuery.of(context).size;
     return SafeArea(
@@ -105,6 +108,7 @@ class _ResultPageState extends State<ResultPage> {
                   ),
                 ),
                 child: Column(
+                  mainAxisSize: MainAxisSize.max,
                   children: [
                     const SizedBox(
                       height: 10,
@@ -194,10 +198,35 @@ class _ResultPageState extends State<ResultPage> {
                       height: 17,
                     ),
                     Text(
-                      "Student : John Doe",
+                      "Student : ${name}",
                       style: headlineName,
                     ),
-                    ScoreCard(size),
+                    const SizedBox(
+                      height: 17,
+                    ),
+                    FutureBuilder(
+                      future: getStudent(formatFilterDate),
+                      builder: (BuildContext context, AsyncSnapshot snapshot){
+                        if (snapshot.data == null){
+                          return Container(
+                            child: Center(
+                              child: Text("Loading"),
+                            ),
+                          );
+                        }else{
+                          return Expanded(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: snapshot.data.length,
+                              itemBuilder: (BuildContext context, int index){
+                                return ScoreCard(size, DateFormat('d MMM yyyy').format(snapshot.data[index].dateTime), DateFormat.Hm().format(snapshot.data[index].dateTime), 0 );
+                                // return QuestionCard(size : size, id : index+1, timer : snapshot.data[index].timer);
+                              },
+                            ),
+                          );
+                        }
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -208,7 +237,8 @@ class _ResultPageState extends State<ResultPage> {
     );
   }
 
-  Container ScoreCard(Size size) {
+  Container ScoreCard(Size size, String formattedDate,
+      String formatTime, int score) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
       height: 70,
@@ -237,10 +267,10 @@ class _ResultPageState extends State<ResultPage> {
                     style: dateFont,
                   ),
                   const SizedBox(
-                    width: 15,
+                    width: 10,
                   ),
                   Text(
-                    "15 : 00",
+                    "15:00",
                     style: timeFont,
                   )
                 ],

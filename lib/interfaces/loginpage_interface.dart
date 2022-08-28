@@ -1,11 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_student_speakingtest/models/user_login.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/color.dart';
 import '../constants/font.dart';
 import 'registerpage_interface.dart';
 import 'package:http/http.dart' as http;
+import 'package:email_validator/email_validator.dart';
 
 import 'homepage_interface.dart';
 
@@ -23,28 +26,29 @@ class _LoginPageState extends State<LoginPage> {
 
   final passController = TextEditingController();
 
-  bool _isLoading = false;
+  // bool _isLoading = false;
 
-  connectLoginAPI( String email, String password) async {
-    var body = {'email': email, 'password': password};
-    var header = {'Content-Type': 'application/json'};
-
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    Uri url = Uri.parse('https://unudspeakingtest.com/student.php?api=login');
-
-    final hasilResponse =
-        await http.post(url, body: jsonEncode(body), headers: header);
-    if (hasilResponse.statusCode == 200) {
-      var jsonData = json.decode(hasilResponse.body);
-      setState(() {
-        _isLoading = false;
-        sharedPreferences.setString('token', jsonData['token'].toString());
-        Navigator.of(context).pushReplacementNamed(HomePage.nameRoute);
-      });
-    } else {
-      print(hasilResponse.body);
-    }
-  }
+  // connectLoginAPI(String email, String password) async {
+  //   var body = {'email': email, 'password': password};
+  //   var header = {'Content-Type': 'application/json'};
+  //
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //   Uri url = Uri.parse('https://unudspeakingtest.com/student.php?api=login');
+  //
+  //   final hasilResponse =
+  //       await http.post(url, body: jsonEncode(body), headers: header);
+  //
+  //   if (hasilResponse.statusCode == 200) {
+  //     var jsonData = json.decode(hasilResponse.body);
+  //     setState(() {
+  //       _isLoading = false;
+  //       sharedPreferences.setString('token', jsonData['token'].toString());
+  //       Navigator.of(context).pushReplacementNamed(HomePage.nameRoute);
+  //     });
+  //   } else {
+  //     print(hasilResponse.body);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -88,11 +92,12 @@ class _LoginPageState extends State<LoginPage> {
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(50),
                   )),
-              child: _isLoading
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : Column(
+              // child: _isLoading
+              //     ? Center(
+              //         child: CircularProgressIndicator(),
+              //       )
+              //     :
+              child : Column(
                       children: [
                         const SizedBox(
                           height: 27,
@@ -116,6 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                                 style: headlineHint,
                               ),
                               TextFormField(
+                                keyboardType: TextInputType.emailAddress,
                                 controller: emailController,
                                 decoration: InputDecoration(
                                   focusedBorder: InputBorder.none,
@@ -183,8 +189,15 @@ class _LoginPageState extends State<LoginPage> {
                           margin: const EdgeInsets.symmetric(horizontal: 27),
                           width: 10000,
                           child: TextButton(
-                            onPressed: () {
-                              connectLoginAPI(emailController.text, passController.text);
+                            onPressed: () async {
+                              // connectLoginAPI(
+                              //     emailController.text, passController.text);
+                              SharedPreferences sharedpreferences = await SharedPreferences.getInstance();
+                              loginUser( emailController.text, passController.text);
+                              if(sharedpreferences.getString('token') != null){
+                                print('Token Login Button :${sharedpreferences.getString('token')}');
+                                Navigator.of(context).pushReplacementNamed(HomePage.nameRoute);
+                              }
                             },
                             child: Text(
                               "LOGIN",

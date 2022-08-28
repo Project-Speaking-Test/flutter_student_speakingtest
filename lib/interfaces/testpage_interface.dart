@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_student_speakingtest/models/question_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/color.dart';
 import '../constants/font.dart';
 import 'completepage_interface.dart';
@@ -16,17 +18,21 @@ class TestPage extends StatefulWidget {
 class _TestPageState extends State<TestPage> {
 
   var _counter = 1;
-
+  bool mulai = true;
   late Timer _timer;
-  final int _intialStart =3;
-  int _start = 3;
+  late int _intialStart =3;
+  int _start = 10;
+
 
   startTimer (){
     const oneSec = Duration(seconds: 1);
     _timer = Timer.periodic(
       oneSec,
           (Timer timer) {
+        print(_start);
+        print(_intialStart);
         if (_start == 0) {
+          mulai =true;
           setState(() {
             if(_counter ==10){
               timer.cancel();
@@ -37,6 +43,7 @@ class _TestPageState extends State<TestPage> {
             }
           });
         } else {
+          mulai = false;
           setState(() {
             _start--;
           });
@@ -44,6 +51,7 @@ class _TestPageState extends State<TestPage> {
       },
     );
   }
+  late SharedPreferences sharedPreferences;
   @override
   void initState() {
     startTimer();
@@ -52,7 +60,9 @@ class _TestPageState extends State<TestPage> {
 
   @override
   Widget build(BuildContext context) {
+    var question = getQuestionItem(_counter);
     Size size = MediaQuery.of(context).size;
+
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -127,10 +137,33 @@ class _TestPageState extends State<TestPage> {
                       width: 300,
                       height: 100,
                       child: Center(
-                        child: Text(
-                          "Why do you think learning English is very important?",
-                          style: questionFont,
-                          textAlign: TextAlign.center,
+                        // child: Text(
+                        //   question.question.toString(),
+                        //   style: questionFont,
+                        //   textAlign: TextAlign.center,
+                        // ),
+                        child: FutureBuilder(
+                          future: getQuestion(),
+                          builder: (BuildContext context, AsyncSnapshot snapshot){
+                            if (snapshot.data == null){
+                              return Container(
+                                child: Center(
+                                  child: Text("Loading"),
+                                ),
+                              );
+                            }else{
+                              // questionItem =snapshot.data[_counter-1].question;
+                              _intialStart =snapshot.data[_counter-1].timer;
+                              if(mulai){
+                                _start = _intialStart;
+                              }
+                              return Text(
+                                snapshot.data[_counter-1].question,
+                                style: questionFont,
+                                textAlign: TextAlign.center,
+                              );
+                            }
+                          },
                         ),
                       ),
                     )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_student_speakingtest/constants/font.dart';
 import 'package:flutter_student_speakingtest/interfaces/loginpage_interface.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,6 +12,7 @@ class DialogLogOut extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text('LOG OUT'),
+      titleTextStyle: scoreFont,
       content: Text('Are you sure wanna log out ?'),
       actions: [
         TextButton(

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_student_speakingtest/models/user_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,34 +17,33 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  bool _isLoading = false;
+  // bool _isLoading = false;
 
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passController = TextEditingController();
 
 
-  connectRegisterAPI(String name, String email, String password) async {
-    var body = {'name': name, 'email': email, 'password': password};
-    var header = {'Content-Type': 'application/json'};
-
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    Uri url = Uri.parse('https://unudspeakingtest.com/student.php?api=signup');
-
-    final hasilResponse =
-        await http.post(url, body: jsonEncode(body), headers: header);
-    if (hasilResponse.statusCode == 201) {
-      var jsonData = json.decode(hasilResponse.body);
-      setState(() {
-        _isLoading = false;
-        sharedPreferences.setString('token', jsonData['token'].toString());
-        Navigator.of(context).pushReplacementNamed(HomePage.nameRoute);
-      });
-    } else {
-      print(hasilResponse.body + 'tes');
-    }
-  }
-
+  // connectRegisterAPI(String name, String email, String password) async {
+  //   var body = {'name': name, 'email': email, 'password': password};
+  //   var header = {'Content-Type': 'application/json'};
+  //
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //   Uri url = Uri.parse('https://unudspeakingtest.com/student.php?api=signup');
+  //
+  //   final hasilResponse =
+  //       await http.post(url, body: jsonEncode(body), headers: header);
+  //   if (hasilResponse.statusCode == 201) {
+  //     var jsonData = json.decode(hasilResponse.body);
+  //     setState(() {
+  //       _isLoading = false;
+  //       sharedPreferences.setString('token', jsonData['token'].toString());
+  //       Navigator.of(context).pushReplacementNamed(HomePage.nameRoute);
+  //     });
+  //   } else {
+  //     print(hasilResponse.body + 'tes');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -87,11 +87,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(50),
                   )),
-              child: _isLoading
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : Column(
+              // child: _isLoading
+              //     ? Center(
+              //         child: CircularProgressIndicator(),
+              //       )
+              //     :
+              child : Column(
                       children: [
                         const SizedBox(
                           height: 25,
@@ -219,10 +220,12 @@ class _RegisterPageState extends State<RegisterPage> {
                           margin: const EdgeInsets.symmetric(horizontal: 27),
                           width: 10000,
                           child: TextButton(
-                            onPressed: () {
-                              _isLoading = true;
-                              connectRegisterAPI(nameController.text,
-                                  emailController.text, passController.text);
+                            onPressed: () async {
+                              SharedPreferences sharedpreferences = await SharedPreferences.getInstance();
+                              createUser(nameController.text, emailController.text, passController.text);
+                              if(sharedpreferences.getString('token') != null){
+                                Navigator.of(context).pushReplacementNamed(HomePage.nameRoute);
+                              }
                             },
                             child: Text(
                               "REGISTER",

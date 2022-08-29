@@ -17,6 +17,10 @@ class TestPage extends StatefulWidget {
 
 class _TestPageState extends State<TestPage> {
 
+  // final record = Record();
+  // late bool isrecording;
+
+
   var _counter = 1;
   bool mulai = true;
   late Timer _timer;
@@ -33,11 +37,15 @@ class _TestPageState extends State<TestPage> {
         print(_intialStart);
         if (_start == 0) {
           mulai =true;
-          setState(() {
+          setState(() async {
             if(_counter ==10){
               timer.cancel();
               Navigator.of(context).pushReplacementNamed(CompletePage.nameRoute);
             }else{
+              // isrecording = await record.isRecording();
+              // if(isrecording){
+              //   await record.stop();
+              // }
               _counter++;
               _start =_intialStart;
             }
@@ -185,9 +193,13 @@ class _TestPageState extends State<TestPage> {
                 ),
                 child: Center(
                   child: FloatingActionButton(
-                    child: Icon(Icons.mic),
-                    onPressed: (){
-
+                    backgroundColor: Colors.red,
+                    // child: isrecording ? Icon(Icons.mic) : Icon(Icons.stop),
+                    child: Icon(Icons.mic) ,
+                    onPressed: () async {
+                      // await record.start(
+                      //   path: 'D:\Programer\Kode Intellij IDEA\flutter_student_speakingtest\record\myFile$_counter.m4a',
+                      // );
                     },
                   ),
                 )

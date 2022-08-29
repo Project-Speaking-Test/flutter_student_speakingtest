@@ -137,6 +137,7 @@ class _TestResultPageState extends State<TestResultPage> {
                             width: 300,
                             height: 100,
                             child: Center(
+
                               child: FutureBuilder(
                                 future: getQuestion(),
                                 builder: (BuildContext context, AsyncSnapshot snapshot){

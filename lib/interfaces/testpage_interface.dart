@@ -69,7 +69,7 @@ class _TestPageState extends State<TestPage> {
     }else{
       print(answer);
       postAudio(answer);
-      Navigator.of(context).pushReplacementNamed(ResultPage.nameRoute);
+      Navigator.of(context).pushReplacementNamed(ResultPage.nameRoute );
     }
   }
   // startRecord()async{

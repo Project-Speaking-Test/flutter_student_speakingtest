@@ -17,7 +17,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  // bool _isLoading = false;
 
   final nameController = TextEditingController();
   final emailController = TextEditingController();
@@ -92,7 +91,7 @@ class _RegisterPageState extends State<RegisterPage> {
               //         child: CircularProgressIndicator(),
               //       )
               //     :
-              child : Column(
+              child :  Column(
                       children: [
                         const SizedBox(
                           height: 25,
@@ -222,7 +221,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: TextButton(
                             onPressed: () async {
                               SharedPreferences sharedpreferences = await SharedPreferences.getInstance();
-                              createUser(nameController.text, emailController.text, passController.text);
+                              await createUser(nameController.text, emailController.text, passController.text);
                               if(sharedpreferences.getString('token') != null){
                                 Navigator.of(context).pushReplacementNamed(HomePage.nameRoute);
                               }

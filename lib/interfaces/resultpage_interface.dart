@@ -24,13 +24,15 @@ class _ResultPageState extends State<ResultPage> {
 
   @override
   void initState() {
-    super.initState();
     checkLoginStatus();
+    super.initState();
   }
 
   checkLoginStatus () async{
     sharedPreferences = await SharedPreferences.getInstance();
-    name = sharedPreferences.getString('name').toString();
+    setState(() {
+      name = sharedPreferences.getString('name').toString();
+    });
     if (sharedPreferences.getString('token')==null){
       Navigator.of(context).pushReplacementNamed(LoginPage.nameRoute);
     }
@@ -39,6 +41,7 @@ class _ResultPageState extends State<ResultPage> {
 
   @override
   Widget build(BuildContext context) {
+
     String formattedDate = DateFormat('d MMM yyyy').format(_dateTime);
     String formatFilterDate = DateFormat('yyyy-MM-d').format(_dateTime);
 
@@ -219,7 +222,7 @@ class _ResultPageState extends State<ResultPage> {
                               shrinkWrap: true,
                               itemCount: snapshot.data.length,
                               itemBuilder: (BuildContext context, int index){
-                                return ScoreCard(size, DateFormat('d MMM yyyy').format(snapshot.data[index].dateTime), DateFormat.Hm().format(snapshot.data[index].dateTime), 0 );
+                                return ScoreCard(size, DateFormat('d MMM yyyy').format(DateTime.parse(snapshot.data[index].dateTime)), DateFormat.Hm().format(DateTime.parse(snapshot.data[index].dateTime)), 0 );
                                 // return QuestionCard(size : size, id : index+1, timer : snapshot.data[index].timer);
                               },
                             ),

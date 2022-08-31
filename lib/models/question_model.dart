@@ -14,17 +14,6 @@ class Question {
          question: json['question'], timer: json['timer']);
   }
 }
-Future<Question> getQuestionItem (int id) async {
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  Uri url = Uri.parse('https://unudspeakingtest.com/question.php?api=read&id=$id');
-  var header = {
-    'token' : sharedPreferences.getString('token').toString(),
-  };
-
-  final response = await http.put(url, headers: header);
-  var jsonData = jsonDecode(response.body);
-  return Question.fromJson(jsonData);
-}
 
 Future<List<Question>> getQuestion() async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();

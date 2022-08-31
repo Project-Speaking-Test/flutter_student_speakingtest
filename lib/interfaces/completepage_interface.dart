@@ -115,15 +115,6 @@ class _CompletePageState extends State<CompletePage> {
                   }
                 },
               ),
-              // child: FloatingActionButton(
-              //   onPressed: (){
-              //
-              //   },
-              //   child: const Icon(Icons.person),
-              //   elevation: 0,
-              //   backgroundColor: const Color.fromARGB(21, 255, 255, 255),
-              //   highlightElevation: 0,
-              // ),
             ),
             Positioned(
               left: 0,

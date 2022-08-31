@@ -40,8 +40,8 @@ dependencies:
   http: ^0.13.5
   shared_preferences: ^2.0.15
   email_validator: ^2.1.17
-  fluttertoast: ^8.0.9
-
+  record: ^4.4.0
+  path_provider: ^2.0.11
 
 dev_dependencies:
   flutter_test:

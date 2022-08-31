@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_student_speakingtest/interfaces/dialog_interfaces.dart';
 import 'package:flutter_student_speakingtest/interfaces/loginpage_interface.dart';
+import 'package:flutter_student_speakingtest/models/test_model.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/font.dart';
 import 'testpage_interface.dart';
@@ -18,6 +20,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  DateTime _dateTime = DateTime.now();
 
   late SharedPreferences sharedPreferences;
 
@@ -38,6 +41,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    String formattedDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(_dateTime);
+
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -82,7 +87,6 @@ class _HomePageState extends State<HomePage> {
                 },
                 onSelected: (value) {
                   if (value == 1) {
-                    print('Lokal token : ${sharedPreferences.getString('token')}');
                     showDialog(
                         context: context, builder: (context) => DialogLogOut(sharedPreferences: sharedPreferences,));
                   }
@@ -115,8 +119,13 @@ class _HomePageState extends State<HomePage> {
                     width: 100000,
                     child: TextButton(
                       onPressed: () {
+                        int? id = sharedPreferences.getInt('id_student');
+                        if (id != null){
+                          postQuestion(formattedDate, id);
+                        }
                         Navigator.of(context)
                             .pushReplacementNamed(TestPage.nameRoute);
+
                       },
                       child: Text(
                         "START",

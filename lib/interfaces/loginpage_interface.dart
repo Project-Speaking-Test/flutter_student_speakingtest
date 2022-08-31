@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_student_speakingtest/models/user_login.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/color.dart';
 import '../constants/font.dart';
@@ -21,6 +20,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool isLoading = false;
 
   final emailController = TextEditingController();
 
@@ -97,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
               //         child: CircularProgressIndicator(),
               //       )
               //     :
-              child : Column(
+              child : isLoading ? Center(child : CircularProgressIndicator()) : Column(
                       children: [
                         const SizedBox(
                           height: 27,
@@ -190,13 +190,17 @@ class _LoginPageState extends State<LoginPage> {
                           width: 10000,
                           child: TextButton(
                             onPressed: () async {
-                              // connectLoginAPI(
-                              //     emailController.text, passController.text);
+                              isLoading = true;
+                              await loginUser( emailController.text, passController.text);
                               SharedPreferences sharedpreferences = await SharedPreferences.getInstance();
-                              loginUser( emailController.text, passController.text);
                               if(sharedpreferences.getString('token') != null){
+                                print('Klik 1');
+                                isLoading =false;
                                 print('Token Login Button :${sharedpreferences.getString('token')}');
                                 Navigator.of(context).pushReplacementNamed(HomePage.nameRoute);
+                              }else{
+                                isLoading = false;
+                                //toast
                               }
                             },
                             child: Text(

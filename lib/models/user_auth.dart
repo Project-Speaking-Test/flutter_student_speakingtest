@@ -14,9 +14,10 @@ Future<User> createUser (String name, String email, String password) async {
   if (respons.statusCode ==201){
     sharedPreferences.setString('token', jsonRespData['data']['token'].toString());
     sharedPreferences.setString('name', jsonRespData['data']['name'].toString());
+    sharedPreferences.setInt('id_student', jsonRespData['data']['id_student']);
     return User.fromJson(jsonRespData);
   }else{
-    throw Exception('Failed to auth user');
+    throw Exception(jsonRespData['message']);
   }
 }
 

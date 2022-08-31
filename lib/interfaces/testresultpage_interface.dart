@@ -137,7 +137,6 @@ class _TestResultPageState extends State<TestResultPage> {
                             width: 300,
                             height: 100,
                             child: Center(
-
                               child: FutureBuilder(
                                 future: getQuestion(),
                                 builder: (BuildContext context, AsyncSnapshot snapshot){
@@ -183,7 +182,7 @@ class _TestResultPageState extends State<TestResultPage> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(30))),
                             child: Text(
-                              'SCORE : 10',
+                              'SCORE : ',
                               style: headlineTitle2,
                             ),
                           )

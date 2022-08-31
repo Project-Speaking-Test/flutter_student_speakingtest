@@ -14,6 +14,7 @@ Future<UserLogin> loginUser ( String email, String password) async {
   if (respons.statusCode ==200){
     sharedPreferences.setString('token', jsonRespData['data']['token'].toString());
     sharedPreferences.setString('name', jsonRespData['data']['name'].toString());
+    sharedPreferences.setInt('id_student', jsonRespData['data']['id_student']);
     print('Lokal token : ${sharedPreferences.getString('token')}');
     print(sharedPreferences.getString('name'));
     return UserLogin.fromJson(jsonRespData);

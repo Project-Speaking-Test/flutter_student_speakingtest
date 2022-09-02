@@ -28,7 +28,7 @@ Future<Start> postQuestion (String date, int id_student ) async {
   var jsonRespData = jsonDecode(respons.body);
 
   if (jsonRespData['status'] == 1){
-    print(sharedPreferences.getInt('id_student'));
+    // print(sharedPreferences.getInt('id_student'));
     sharedPreferences.setInt('id_test', jsonRespData['data']['id_test']);
     return Start.fromJson(jsonRespData['data']);
   }else{

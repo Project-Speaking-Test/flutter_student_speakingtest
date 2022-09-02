@@ -6,12 +6,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Question {
   String? question;
   int? timer;
+  int? id_soal;
 
-  Question({ required this.question, required this.timer});
+  Question({ required this.question, required this.timer, required this.id_soal});
 
   factory Question.fromJson(Map<String, dynamic> json) {
     return Question(
-         question: json['question'], timer: json['timer']);
+         question: json['question'], timer: json['timer'], id_soal: json['id_soal']);
   }
 }
 

@@ -35,6 +35,7 @@ class _TestPageState extends State<TestPage> {
   late final Directory? directory;
   late final String path;
   List<File> answer = [];
+  List<int> id_soal =[];
 
   Future<void> getQuestions() async {
     question = await getQuestion();
@@ -46,6 +47,7 @@ class _TestPageState extends State<TestPage> {
   void setTimer() {
     if (_counter <= question!.length){
       final time = question?[_counter-1].timer ?? 0;
+      final id = question?[_counter-1].id_soal ?? 0;
       timeTick = time;
       setState(() {});
       Timer.periodic(
@@ -62,14 +64,18 @@ class _TestPageState extends State<TestPage> {
               _stop();
             }
             _counter++;
+            id_soal.add(id);
             setTimer();
           }
         },
       );
     }else{
       print(answer);
-      postAudio(answer);
-      Navigator.of(context).pushReplacementNamed(ResultPage.nameRoute );
+      print(id_soal);
+      postAudio(answer, id_soal);
+      sharedPreferences.getInt('id_test');
+      // postAudio(answer);
+      Navigator.of(context).pushReplacementNamed(CompletePage.nameRoute );
     }
   }
   // startRecord()async{
@@ -79,10 +85,7 @@ class _TestPageState extends State<TestPage> {
   //   await record.stop();
   // }
   Future<void> _stop() async {
-
-
     final audioPath = await _audioRecorder.stop();
-
     if (audioPath != null) {
       saveAudioFile(audioPath);
     }

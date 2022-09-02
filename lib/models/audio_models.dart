@@ -5,24 +5,38 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 
 
-Future<void> postAudio (List<File> answer) async{
+Future<void> postAudio (List<File> answer, List<int> id) async{
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   Uri url = Uri.parse("https://unudspeakingtest.com/test.php?api=save_result");
+  var request = http.MultipartRequest('POST', url  );
   var header = {
-    'Content-Type': 'multipart/form-data',
     'token' : sharedPreferences.getString('token').toString()
   };
-  for (int i = 0; i< answer.length; i++){
-    var body = {
-      'id_test' : sharedPreferences.getInt('id_test'),
-      'id_soal' : i
-    };
-    final respons = await http.post(url, body: jsonEncode(body), headers: header);
-    var jsonRespData = jsonDecode(respons.body);
-    if (jsonRespData['status'] == 1){
-      print(jsonRespData['message']);
-    }else{
-      throw Exception(jsonRespData['message']);
-    }
+  for (int i =0; i<answer.length; i++){
+    request.files.add(
+      await http.MultipartFile.fromPath('answer', answer[i].path),
+    );
+    request.headers.addAll(header);
+    request.fields['id_test'] = '${sharedPreferences.getInt('id_test')}';
+    request.fields['id_soal'] = '${id[i]}';
+
+    var res = await request.send();
   }
+  // var header = {
+  //   'Content-Type': 'multipart/form-data',
+  //   'token' : sharedPreferences.getString('token').toString()
+  // };
+  // for (int i = 0; i< answer.length; i++){
+  //   var body = {
+  //     'id_test' : sharedPreferences.getInt('id_test'),
+  //     'id_soal' : i
+  //   };
+  //   final respons = await http.post(url, body: jsonEncode(body), headers: header);
+  //   var jsonRespData = jsonDecode(respons.body);
+  //   if (jsonRespData['status'] == 1){
+  //     // print(jsonRespData['message']);
+  //   }else{
+  //     throw Exception(jsonRespData['message']);
+  //   }
+  // }
 }

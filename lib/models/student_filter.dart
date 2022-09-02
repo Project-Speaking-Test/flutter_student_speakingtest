@@ -19,15 +19,13 @@ class Student {
 Future<List<Student>> getStudent(String date) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   var id = sharedPreferences.getInt('id_student');
-  print('Token Local : ${sharedPreferences.getString('token').toString()}');
-  Uri url = Uri.parse('https://unudspeakingtest.com/test.php?api=read_test&id_student=${id}date=$date');
+  Uri url = Uri.parse('https://unudspeakingtest.com/test.php?api=read_test&id_student=${id}&date=$date');
   var header = {
     'token' : sharedPreferences.getString('token').toString()
   };
   final response = await http.get(url, headers: header);
   var jsonData = json.decode(response.body);
   print(jsonData);
-
   List <dynamic> liststudent = (jsonData as Map<String, dynamic>)['data'];
   List<Student> student = [];
 

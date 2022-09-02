@@ -222,7 +222,7 @@ class _ResultPageState extends State<ResultPage> {
                               shrinkWrap: true,
                               itemCount: snapshot.data.length,
                               itemBuilder: (BuildContext context, int index){
-                                return ScoreCard(size, DateFormat('d MMM yyyy').format(DateTime.parse(snapshot.data[index].dateTime)), DateFormat.Hm().format(DateTime.parse(snapshot.data[index].dateTime)), 0 );
+                                return ScoreCard(size, DateFormat('d MMM yyyy').format(DateTime.parse(snapshot.data[index].dateTime)), DateFormat.Hm().format(DateTime.parse(snapshot.data[index].dateTime)), 0 , snapshot.data[index].id_test);
                                 // return QuestionCard(size : size, id : index+1, timer : snapshot.data[index].timer);
                               },
                             ),
@@ -241,7 +241,7 @@ class _ResultPageState extends State<ResultPage> {
   }
 
   Container ScoreCard(Size size, String formattedDate,
-      String formatTime, int score) {
+      String formatTime, int score, int id_test) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
       height: 70,
@@ -266,14 +266,14 @@ class _ResultPageState extends State<ResultPage> {
               Row(
                 children: [
                   Text(
-                    "21 Aug 2022",
+                    "$formattedDate",
                     style: dateFont,
                   ),
                   const SizedBox(
                     width: 10,
                   ),
                   Text(
-                    "15:00",
+                    "$formatTime",
                     style: timeFont,
                   )
                 ],
@@ -300,7 +300,7 @@ class _ResultPageState extends State<ResultPage> {
                   style: headlineMini,
                 ),
                 Text(
-                  "100",
+                  "$score",
                   style: scoreFont,
                 ),
               ],
@@ -325,7 +325,10 @@ class _ResultPageState extends State<ResultPage> {
                   BoxDecoration(shape: BoxShape.circle, color: secondaryColor),
               child: IconButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed(TestResultPage.nameRoute);
+                  sharedPreferences.setInt('id_test', id_test);
+                  sharedPreferences.setString('formatDate', formattedDate);
+                  sharedPreferences.setString('formatTime', formatTime);
+                  Navigator.of(context).pushNamed(TestResultPage.nameRoute );
                 },
                 icon: Icon(Icons.remove_red_eye_outlined),
                 color: Colors.white,
@@ -339,3 +342,5 @@ class _ResultPageState extends State<ResultPage> {
     );
   }
 }
+
+

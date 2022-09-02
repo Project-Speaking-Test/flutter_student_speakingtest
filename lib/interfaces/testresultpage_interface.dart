@@ -1,4 +1,10 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_student_speakingtest/interfaces/resultpage_interface.dart';
+import 'package:flutter_student_speakingtest/models/student_filter.dart';
+import 'package:flutter_student_speakingtest/models/testdetail_model.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/color.dart';
 import '../constants/font.dart';
 import '../models/question_model.dart';
@@ -13,9 +19,50 @@ class TestResultPage extends StatefulWidget {
 
 class _TestResultPageState extends State<TestResultPage> {
   var _counter = 1;
+  AudioPlayer audioPlayer = AudioPlayer();
+  List<TestDetail>? testDetail;
+  String? formatDate;
+  String? formatTime;
+  String? question;
+  int? score;
+
+
+
+  getData ()async{
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    int? id = sharedPreferences.getInt('id_test');
+    print(id);
+    formatDate =sharedPreferences.getString('formatDate');
+    print(formatDate);
+    formatTime =sharedPreferences.getString('formatTime');
+    print(formatTime);
+    if (id != null){
+      testDetail = await getTestDetail(id);
+    }
+    // testDetail = await getTestDetail(1);
+
+
+    if (testDetail != null){
+      setState(() {
+        score = testDetail?[_counter-1].score;
+        question = testDetail?[_counter-1].question;
+      });
+    }else{
+      score =0;
+      question = 'No Question';
+    }
+
+  }
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+
+
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -41,14 +88,16 @@ class _TestResultPageState extends State<TestResultPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "18 Juli 2022",
+                          formatDate!,
+                          // '123',
                           style: headlineDate,
                         ),
                         const SizedBox(
                           width: 15,
                         ),
                         Text(
-                          "15 : 00",
+                          formatTime!,
+                          // '123',
                           style: headlineDate,
                         ),
                       ],
@@ -74,6 +123,9 @@ class _TestResultPageState extends State<TestResultPage> {
                                 if(_counter !=1){
                                   _counter--;
                                 }
+                                score = testDetail?[_counter-1].score;
+                                question = testDetail?[_counter-1].question;
+                                print(question);
                               });
                             },
                             icon: Icon(Icons.keyboard_arrow_left_sharp),
@@ -113,6 +165,9 @@ class _TestResultPageState extends State<TestResultPage> {
                                 if (_counter != 10){
                                   _counter++;
                                 }
+                                score = testDetail?[_counter-1].score;
+                                question = testDetail?[_counter-1].question;
+                                print(question);
                               });
                             },
                             icon: Icon(Icons.keyboard_arrow_right_sharp),
@@ -137,25 +192,31 @@ class _TestResultPageState extends State<TestResultPage> {
                             width: 300,
                             height: 100,
                             child: Center(
-                              child: FutureBuilder(
-                                future: getQuestion(),
-                                builder: (BuildContext context, AsyncSnapshot snapshot){
-                                  if (snapshot.data == null){
-                                    return Container(
-                                      child: Center(
-                                        child: Text("Loading"),
-                                      ),
-                                    );
-                                  }else{
-                                    // questionItem =snapshot.data[_counter-1].question;
-                                    return Text(
-                                      snapshot.data[_counter-1].question,
+                              child: Text(
+                                      question!,
+                                  // '123',
                                       style: headlineResultQuestion,
                                       textAlign: TextAlign.center,
-                                    );
-                                  }
-                                },
-                              ),
+                                    ),
+                              // child: FutureBuilder(
+                              //   future: getQuestion(),
+                              //   builder: (BuildContext context, AsyncSnapshot snapshot){
+                              //     if (snapshot.data == null){
+                              //       return Container(
+                              //         child: Center(
+                              //           child: Text("Loading"),
+                              //         ),
+                              //       );
+                              //     }else{
+                              //       // questionItem =snapshot.data[_counter-1].question;
+                              //       return Text(
+                              //         snapshot.data[_counter-1].question,
+                              //         style: headlineResultQuestion,
+                              //         textAlign: TextAlign.center,
+                              //       );
+                              //     }
+                              //   },
+                              // ),
                             ),
                           ),
                           Center(
@@ -164,7 +225,14 @@ class _TestResultPageState extends State<TestResultPage> {
                                 shape: BoxShape.circle, color: Colors.green),
                             child: IconButton(
                               icon: Icon(Icons.play_arrow_outlined),
-                              onPressed: () {},
+                              onPressed: () {
+                                Source audioUrl;
+                                var answer = testDetail?[_counter-1].answer;
+                                if (answer!=null){
+                                  audioUrl = UrlSource(answer);
+                                  audioPlayer.play(audioUrl);
+                                }
+                              },
                               color: Colors.white,
                               iconSize: 50,
                             ),
@@ -182,7 +250,8 @@ class _TestResultPageState extends State<TestResultPage> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(30))),
                             child: Text(
-                              'SCORE : ',
+                              'SCORE : $score',
+                              // '123',
                               style: headlineTitle2,
                             ),
                           )

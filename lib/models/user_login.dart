@@ -15,8 +15,8 @@ Future<UserLogin> loginUser ( String email, String password) async {
     sharedPreferences.setString('token', jsonRespData['data']['token'].toString());
     sharedPreferences.setString('name', jsonRespData['data']['name'].toString());
     sharedPreferences.setInt('id_student', jsonRespData['data']['id_student']);
-    print('Lokal token : ${sharedPreferences.getString('token')}');
-    print(sharedPreferences.getString('name'));
+    // print('Lokal token : ${sharedPreferences.getString('token')}');
+    // print(sharedPreferences.getString('name'));
     return UserLogin.fromJson(jsonRespData);
   }else{
     throw Exception('Failed to auth user');

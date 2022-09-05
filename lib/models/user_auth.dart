@@ -15,10 +15,11 @@ Future<User> createUser (String name, String email, String password) async {
     sharedPreferences.setString('token', jsonRespData['data']['token'].toString());
     sharedPreferences.setString('name', jsonRespData['data']['name'].toString());
     sharedPreferences.setInt('id_student', jsonRespData['data']['id_student']);
-    return User.fromJson(jsonRespData);
-  }else{
-    throw Exception(jsonRespData['message']);
   }
+  return User.fromJson(jsonRespData);
+  // else{
+  //   throw Exception(jsonRespData['message']);
+  // }
 }
 
 class User{

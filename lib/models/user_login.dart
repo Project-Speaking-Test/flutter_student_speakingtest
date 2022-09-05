@@ -17,10 +17,11 @@ Future<UserLogin> loginUser ( String email, String password) async {
     sharedPreferences.setInt('id_student', jsonRespData['data']['id_student']);
     // print('Lokal token : ${sharedPreferences.getString('token')}');
     // print(sharedPreferences.getString('name'));
-    return UserLogin.fromJson(jsonRespData);
-  }else{
-    throw Exception('Failed to auth user');
   }
+  return UserLogin.fromJson(jsonRespData);
+  // else{
+  //   throw Exception('Failed to auth user');
+  // }
 }
 
 class UserLogin{

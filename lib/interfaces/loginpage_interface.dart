@@ -190,8 +190,10 @@ class _LoginPageState extends State<LoginPage> {
                           width: 10000,
                           child: TextButton(
                             onPressed: () async {
+                              print('sudah dipencet');
                               isLoading = true;
                               await loginUser( emailController.text, passController.text);
+                              print('sudah dipencet');
                               SharedPreferences sharedpreferences = await SharedPreferences.getInstance();
                               if(sharedpreferences.getString('token') != null){
                                 print('Klik 1');

@@ -1,13 +1,10 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_student_speakingtest/interfaces/resultpage_interface.dart';
-import 'package:flutter_student_speakingtest/models/student_filter.dart';
+
 import 'package:flutter_student_speakingtest/models/testdetail_model.dart';
-import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/color.dart';
 import '../constants/font.dart';
-import '../models/question_model.dart';
 
 class TestResultPage extends StatefulWidget {
   static const nameRoute = '/testresultpage';
@@ -25,6 +22,7 @@ class _TestResultPageState extends State<TestResultPage> {
   String? formatTime;
   String? question;
   int? score;
+  bool isLoading = true;
 
 
 
@@ -36,15 +34,13 @@ class _TestResultPageState extends State<TestResultPage> {
     print(formatDate);
     formatTime =sharedPreferences.getString('formatTime');
     print(formatTime);
-    if (id != null){
-      testDetail = await getTestDetail(id);
-    }
+    testDetail = await getTestDetail(id!);
+    print('dah dsni');
     // testDetail = await getTestDetail(1);
-
 
     if (testDetail != null){
       setState(() {
-        score = testDetail?[_counter-1].score;
+        score = testDetail?[_counter-1].score ?? 0;
         question = testDetail?[_counter-1].question;
       });
     }else{
@@ -52,10 +48,12 @@ class _TestResultPageState extends State<TestResultPage> {
       question = 'No Question';
     }
 
+
   }
   @override
   void initState() {
     getData();
+    isLoading = false;
     super.initState();
   }
 
@@ -66,7 +64,7 @@ class _TestResultPageState extends State<TestResultPage> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        body: Stack(
+        body: isLoading ? Center(child: CircularProgressIndicator(),) : Stack(
           children: [
             Container(
               padding: EdgeInsets.all(0.03 * size.height),
@@ -250,7 +248,7 @@ class _TestResultPageState extends State<TestResultPage> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(30))),
                             child: Text(
-                              'SCORE : $score',
+                              'SCORE : ${score??0}',
                               // '123',
                               style: headlineTitle2,
                             ),

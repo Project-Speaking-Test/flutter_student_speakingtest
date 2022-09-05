@@ -19,6 +19,7 @@ class CompletePage extends StatefulWidget {
 
 class _CompletePageState extends State<CompletePage> {
   late SharedPreferences sharedPreferences;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -34,11 +35,13 @@ class _CompletePageState extends State<CompletePage> {
   }
 
   submitResult(Arguments argument) async {
+    isLoading = true;
     final listAnswer = argument.listAnswer;
     final listId = argument.listId;
     for (var i = 0; i < listAnswer.length; i++) {
       await postAudio(listAnswer[i], listId[i]);
     }
+    isLoading = false;
     Navigator.of(context).pushReplacementNamed(ResultPage.nameRoute);
   }
 
@@ -75,7 +78,7 @@ class _CompletePageState extends State<CompletePage> {
                       decoration: const BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(25)),
                           color: Colors.white),
-                      child: Column(
+                      child: isLoading ? CircularProgressIndicator() : Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset('assets/img/cracker.png'),

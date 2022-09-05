@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_student_speakingtest/interfaces/resultpage_interface.dart';
+import 'package:flutter_student_speakingtest/models/Arguments.dart';
 import 'package:flutter_student_speakingtest/models/audio_models.dart';
 import 'package:flutter_student_speakingtest/models/question_model.dart';
 import 'package:path_provider/path_provider.dart';
@@ -23,10 +24,8 @@ class TestPage extends StatefulWidget {
 }
 
 class _TestPageState extends State<TestPage> {
-
   final _audioRecorder = Record();
   bool isRecording = false;
-
 
   int timeTick = 0;
   List<Question>? question;
@@ -35,19 +34,21 @@ class _TestPageState extends State<TestPage> {
   late final Directory? directory;
   late final String path;
   List<File> answer = [];
-  List<int> id_soal =[];
+  List<int> id_soal = [];
 
   Future<void> getQuestions() async {
+    sharedPreferences = await SharedPreferences.getInstance();
     question = await getQuestion();
-    if (question != null  && question!.isNotEmpty){
+    if (question != null && question!.isNotEmpty) {
       setTimer();
     }
+    sharedPreferences.getInt('id_test');
   }
 
   void setTimer() {
-    if (_counter <= question!.length){
-      final time = question?[_counter-1].timer ?? 0;
-      final id = question?[_counter-1].id_soal ?? 0;
+    if (_counter <= question!.length) {
+      final time = question?[_counter - 1].timer ?? 0;
+      final id = question?[_counter - 1].id_soal ?? 0;
       timeTick = time;
       setState(() {});
       Timer.periodic(
@@ -58,7 +59,7 @@ class _TestPageState extends State<TestPage> {
             setState(() {});
           } else {
             timer.cancel();
-            if(isRecording == true){
+            if (isRecording == true) {
               isRecording = false;
               // stopRecord();
               _stop();
@@ -69,15 +70,16 @@ class _TestPageState extends State<TestPage> {
           }
         },
       );
-    }else{
-      print(answer);
-      print(id_soal);
-      postAudio(answer, id_soal);
-      sharedPreferences.getInt('id_test');
+    } else {
+      // print(answer);
+      // print(id_soal);
+      // postAudio(answer, id_soal);
       // postAudio(answer);
-      Navigator.of(context).pushReplacementNamed(CompletePage.nameRoute );
+      Navigator.of(context).pushReplacementNamed(CompletePage.nameRoute,
+          arguments: Arguments(answer, id_soal));
     }
   }
+
   // startRecord()async{
   //   await record.start();
   // }
@@ -113,7 +115,6 @@ class _TestPageState extends State<TestPage> {
       }
     }
   }
-
 
   setDirectory() async {
     directory = await getExternalStorageDirectory();
@@ -163,9 +164,7 @@ class _TestPageState extends State<TestPage> {
         body: Stack(
           children: [
             Container(
-              decoration: BoxDecoration(
-                  gradient: gradientBackgroundColor
-              ),
+              decoration: BoxDecoration(gradient: gradientBackgroundColor),
               child: Center(
                 child: Column(
                   children: [
@@ -178,7 +177,11 @@ class _TestPageState extends State<TestPage> {
                         SizedBox(
                           width: 0.03 * size.height,
                         ),
-                        Image.asset('assets/img/Logo Udayana (Tanpa Nama).png', height: 47.96, width: 48.03,),
+                        Image.asset(
+                          'assets/img/Logo Udayana (Tanpa Nama).png',
+                          height: 47.96,
+                          width: 48.03,
+                        ),
                         const SizedBox(
                           width: 15,
                         ),
@@ -211,11 +214,9 @@ class _TestPageState extends State<TestPage> {
                           width: 0.3 * size.width,
                           height: 45,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(100)),
-                              border: Border.all(
-                                  color: timerBorderColor
-                              )
-                          ),
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(100)),
+                              border: Border.all(color: timerBorderColor)),
                           child: Center(
                             child: Text(
                               "$timeTick",
@@ -226,14 +227,14 @@ class _TestPageState extends State<TestPage> {
                       ],
                     ),
                     SizedBox(
-                      height: 0.13 *size.height,
+                      height: 0.13 * size.height,
                     ),
                     SizedBox(
                       width: 300,
                       height: 100,
                       child: Center(
                         child: Text(
-                          question?[_counter-1].question  ?? 'Loading',
+                          question?[_counter - 1].question ?? 'Loading',
                           style: questionFont,
                           textAlign: TextAlign.center,
                         ),
@@ -262,11 +263,11 @@ class _TestPageState extends State<TestPage> {
                       // child: Icon(Icons.mic) ,
                       onPressed: () async {
                         setState(() {
-                          if (isRecording){
+                          if (isRecording) {
                             // stopRecord();
                             _stop();
                             isRecording = false;
-                          }else{
+                          } else {
                             // startRecord();
                             _start();
                             isRecording = true;
@@ -274,8 +275,7 @@ class _TestPageState extends State<TestPage> {
                         });
                       },
                     ),
-                  )
-              ),
+                  )),
             )
           ],
         ),
@@ -283,4 +283,3 @@ class _TestPageState extends State<TestPage> {
     );
   }
 }
-

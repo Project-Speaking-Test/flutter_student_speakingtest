@@ -1,27 +1,21 @@
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 
-
-Future<void> postAudio (List<File> answer, List<int> id) async{
+Future<void> postAudio(File answer, int id) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   Uri url = Uri.parse("https://unudspeakingtest.com/test.php?api=save_result");
-  var request = http.MultipartRequest('POST', url  );
+  var request = http.MultipartRequest('POST', url);
   var header = {
-    'token' : sharedPreferences.getString('token').toString()
+    'token': sharedPreferences.getString('token').toString(),
+    'Content-Type': 'multipart/form-data',
   };
-  for (int i =0; i<answer.length; i++){
-    request.files.add(
-      await http.MultipartFile.fromPath('answer', answer[i].path),
-    );
-    request.headers.addAll(header);
-    request.fields['id_test'] = '${sharedPreferences.getInt('id_test')}';
-    request.fields['id_soal'] = '${id[i]}';
-
-    var res = await request.send();
-  }
+  request.files.add(await http.MultipartFile.fromPath('answer', answer.path));
+  request.headers.addAll(header);
+  request.fields['id_test'] = '${sharedPreferences.getInt('id_test')}';
+  request.fields['id_soal'] = '$id';
+  var response = await request.send();
+  print(response.reasonPhrase);
   // var header = {
   //   'Content-Type': 'multipart/form-data',
   //   'token' : sharedPreferences.getString('token').toString()

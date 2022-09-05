@@ -186,7 +186,11 @@ class _ResultPageState extends State<ResultPage> {
                                         bottomRight: Radius.circular(20),
                                       )),
                                   child: TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      setState(() {
+
+                                      });
+                                    },
                                     child: Text(
                                       "GO",
                                       style: headlineDate,

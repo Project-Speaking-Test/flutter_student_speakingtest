@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/font.dart';
+import '../models/Arguments.dart';
 import 'dialog_interfaces.dart';
 import 'loginpage_interface.dart';
 import 'resultpage_interface.dart';
+import 'package:flutter_student_speakingtest/models/audio_models.dart';
 
 import '../constants/color.dart';
 
@@ -16,7 +18,6 @@ class CompletePage extends StatefulWidget {
 }
 
 class _CompletePageState extends State<CompletePage> {
-
   late SharedPreferences sharedPreferences;
 
   @override
@@ -25,13 +26,20 @@ class _CompletePageState extends State<CompletePage> {
     checkLoginStatus();
   }
 
-  checkLoginStatus () async{
-
+  checkLoginStatus() async {
     sharedPreferences = await SharedPreferences.getInstance();
-    if (sharedPreferences.getString('token')==null){
+    if (sharedPreferences.getString('token') == null) {
       Navigator.of(context).pushReplacementNamed(LoginPage.nameRoute);
     }
+  }
 
+  submitResult(Arguments argument) async {
+    final listAnswer = argument.listAnswer;
+    final listId = argument.listId;
+    for (var i = 0; i < listAnswer.length; i++) {
+      await postAudio(listAnswer[i], listId[i]);
+    }
+    Navigator.of(context).pushReplacementNamed(ResultPage.nameRoute);
   }
 
   @override
@@ -49,7 +57,8 @@ class _CompletePageState extends State<CompletePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset('assets/img/Logo Udayana.png',height: 105.32, width: 92.06),
+                    Image.asset('assets/img/Logo Udayana.png',
+                        height: 105.32, width: 92.06),
                     const SizedBox(
                       height: 20,
                     ),
@@ -64,9 +73,8 @@ class _CompletePageState extends State<CompletePage> {
                       width: 290,
                       height: 300,
                       decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(25)),
-                        color: Colors.white
-                      ),
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                          color: Colors.white),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -86,7 +94,7 @@ class _CompletePageState extends State<CompletePage> {
                       ),
                     ),
                     SizedBox(
-                      height: 0.17 *size.height,
+                      height: 0.17 * size.height,
                     )
                   ],
                 ),
@@ -111,7 +119,10 @@ class _CompletePageState extends State<CompletePage> {
                 onSelected: (value) {
                   if (value == 1) {
                     showDialog(
-                        context: context, builder: (context) => DialogLogOut(sharedPreferences: sharedPreferences,));
+                        context: context,
+                        builder: (context) => DialogLogOut(
+                          sharedPreferences: sharedPreferences,
+                        ));
                   }
                 },
               ),
@@ -121,21 +132,20 @@ class _CompletePageState extends State<CompletePage> {
               right: 0,
               bottom: 0,
               child: Container(
-                height: 0.2* size.height,
+                height: 0.2 * size.height,
                 decoration: BoxDecoration(
                     color: backgroundColor,
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(50)
-                    )
-                ),
+                    borderRadius:
+                    const BorderRadius.only(topLeft: Radius.circular(50))),
                 child: Center(
                   child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 27),
                     padding: const EdgeInsets.all(5),
                     width: 100000,
                     child: TextButton(
-                      onPressed: (){
-                        Navigator.of(context).pushReplacementNamed(ResultPage.nameRoute);
+                      onPressed: () {
+                        submitResult(ModalRoute.of(context)!.settings.arguments
+                        as Arguments);
                       },
                       child: Text(
                         "SUBMIT",
@@ -143,9 +153,9 @@ class _CompletePageState extends State<CompletePage> {
                       ),
                     ),
                     decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(Radius.circular(100)),
-                        gradient: gradientBackgroundColor
-                    ),
+                        borderRadius:
+                        const BorderRadius.all(Radius.circular(100)),
+                        gradient: gradientBackgroundColor),
                   ),
                 ),
               ),

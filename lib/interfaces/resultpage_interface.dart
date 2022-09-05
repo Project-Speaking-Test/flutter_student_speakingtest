@@ -226,7 +226,7 @@ class _ResultPageState extends State<ResultPage> {
                               shrinkWrap: true,
                               itemCount: snapshot.data.length,
                               itemBuilder: (BuildContext context, int index){
-                                return ScoreCard(size, DateFormat('d MMM yyyy').format(DateTime.parse(snapshot.data[index].dateTime)), DateFormat.Hm().format(DateTime.parse(snapshot.data[index].dateTime)), 0 , snapshot.data[index].id_test);
+                                return ScoreCard(size, DateFormat('d MMM yyyy').format(DateTime.parse(snapshot.data[index].dateTime)), DateFormat.Hm().format(DateTime.parse(snapshot.data[index].dateTime)), snapshot.data[index].total_score ?? 0 , snapshot.data[index].id_test);
                                 // return QuestionCard(size : size, id : index+1, timer : snapshot.data[index].timer);
                               },
                             ),

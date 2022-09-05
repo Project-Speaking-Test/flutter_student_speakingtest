@@ -37,23 +37,23 @@ class _TestResultPageState extends State<TestResultPage> {
     testDetail = await getTestDetail(id!);
     print('dah dsni');
     // testDetail = await getTestDetail(1);
-
     if (testDetail != null){
-      setState(() {
         score = testDetail?[_counter-1].score ?? 0;
         question = testDetail?[_counter-1].question;
-      });
     }else{
       score =0;
       question = 'No Question';
     }
+    isLoading = false;
+    setState(() {
+
+    });
 
 
   }
   @override
   void initState() {
     getData();
-    isLoading = false;
     super.initState();
   }
 

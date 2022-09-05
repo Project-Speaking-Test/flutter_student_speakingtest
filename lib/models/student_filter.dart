@@ -7,11 +7,12 @@ class Student {
   int? id_test;
   String? dateTime;
   int? id_student;
+  int? total_score;
 
-  Student ({this.id_test, this.dateTime, this.id_student});
+  Student ({this.id_test, this.dateTime, this.id_student,  this.total_score});
   factory Student.fromJson(Map <String, dynamic> json) {
     return Student(
-        id_test: json['id_test'], dateTime: json['datetime'], id_student: json['id_student'],
+        id_test: json['id_test'], dateTime: json['datetime'], id_student: json['id_student'], total_score: json['total_score']
     );
   }
 }

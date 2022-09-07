@@ -101,170 +101,176 @@ class _LoginPageState extends State<LoginPage> {
               //     :
               child : Form(
                 key: _formKey,
-                child: isLoading ? Center(child : CircularProgressIndicator()) : Column(
-                        children: [
-                          const SizedBox(
-                            height: 27,
-                          ),
-                          Text(
-                            "Login",
-                            style: headlineTitle1,
-                          ),
-                          const SizedBox(
-                            height: 27,
-                          ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 27),
-                            padding: const EdgeInsets.only(
-                                left: 25, right: 25, top: 25, bottom: 5),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Username",
-                                  style: headlineHint,
-                                ),
-                                TextFormField(
-                                  validator: (CurrentValue){
-                                    var nonNullValue=CurrentValue??'';
-                                    if(nonNullValue.isEmpty){
-                                      return ("username is required");
-                                    }
-                                    if(!nonNullValue.contains("@")){
-                                      return ("username should contains @");
-                                    }
-                                    return null;
-                                  },
-                                  keyboardType: TextInputType.emailAddress,
-                                  controller: emailController,
-                                  decoration: InputDecoration(
-                                    focusedBorder: InputBorder.none,
-                                    enabledBorder: InputBorder.none,
-                                    hintText: 'userspeak@mail.com',
-                                    hintStyle: hintText,
+                child: isLoading ? Center(child : CircularProgressIndicator()) : SingleChildScrollView(
+                  child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 27,
+                            ),
+                            Text(
+                              "Login",
+                              style: headlineTitle1,
+                            ),
+                            const SizedBox(
+                              height: 27,
+                            ),
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 27),
+                              padding: const EdgeInsets.only(
+                                  left: 25, right: 25, top: 25, bottom: 5),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Username",
+                                    style: headlineHint,
                                   ),
-                                )
-                              ],
-                            ),
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(20)),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.2),
-                                    spreadRadius: 0,
-                                    blurRadius: 1,
+                                  TextFormField(
+                                    validator: (CurrentValue){
+                                      var nonNullValue=CurrentValue??'';
+                                      if(nonNullValue.isEmpty){
+                                        return ("username is required");
+                                      }
+                                      if(!nonNullValue.contains("@")){
+                                        return ("username should contains @");
+                                      }
+                                      return null;
+                                    },
+                                    keyboardType: TextInputType.emailAddress,
+                                    controller: emailController,
+                                    decoration: InputDecoration(
+                                      focusedBorder: InputBorder.none,
+                                      enabledBorder: InputBorder.none,
+                                      hintText: 'userspeak@mail.com',
+                                      hintStyle: hintText,
+                                    ),
                                   )
-                                ]),
-                          ),
-                          const SizedBox(
-                            height: 17,
-                          ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 27),
-                            padding: const EdgeInsets.only(
-                                left: 25, right: 25, top: 25, bottom: 5),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Password",
-                                  style: headlineHint,
-                                ),
-                                TextFormField(
-                                  validator: (CurrentValue){
-                                    var nonNullValue=CurrentValue??'';
-                                    if(nonNullValue.isEmpty){
-                                      return ("butuh password");
-                                    }
-                                    if(nonNullValue.length < 8){
-                                      return ("password terlalu pendek, minimal 8 karakter");
-                                    }
-                                    return null;
-                                  },
-                                  controller: passController,
-                                  obscureText: true,
-                                  decoration: InputDecoration(
-                                    focusedBorder: InputBorder.none,
-                                    enabledBorder: InputBorder.none,
-                                    hintText: '* * * * * * * * * * * ',
-                                    hintStyle: hintText,
+                                ],
+                              ),
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      const BorderRadius.all(Radius.circular(20)),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      spreadRadius: 0,
+                                      blurRadius: 1,
+                                    )
+                                  ]),
+                            ),
+                            const SizedBox(
+                              height: 17,
+                            ),
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 27),
+                              padding: const EdgeInsets.only(
+                                  left: 25, right: 25, top: 25, bottom: 5),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Password",
+                                    style: headlineHint,
                                   ),
-                                )
-                              ],
-                            ),
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(20)),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.2),
-                                    spreadRadius: 0,
-                                    blurRadius: 1,
+                                  TextFormField(
+                                    validator: (CurrentValue){
+                                      var nonNullValue=CurrentValue??'';
+                                      if(nonNullValue.isEmpty){
+                                        return ("butuh password");
+                                      }
+                                      if(nonNullValue.length < 8){
+                                        return ("password terlalu pendek, minimal 8 karakter");
+                                      }
+                                      return null;
+                                    },
+                                    controller: passController,
+                                    obscureText: true,
+                                    decoration: InputDecoration(
+                                      focusedBorder: InputBorder.none,
+                                      enabledBorder: InputBorder.none,
+                                      hintText: '* * * * * * * * * * * ',
+                                      hintStyle: hintText,
+                                    ),
                                   )
-                                ]),
-                          ),
-                          const SizedBox(
-                            height: 17,
-                          ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 27),
-                            width: 10000,
-                            child: TextButton(
-                              onPressed: () async {
-                                isLoading = true;
-                                await loginUser( emailController.text, passController.text);
-                                SharedPreferences sharedpreferences = await SharedPreferences.getInstance();
-                                isLoading =false;
-                                if (_formKey.currentState!.validate() && sharedpreferences.getString('token')!= null) {
-                                  Navigator.of(context).pushReplacementNamed(HomePage.nameRoute);
-                                }
-                                // if(sharedpreferences.getString('token') != null){
-                                //   Navigator.of(context).pushReplacementNamed(HomePage.nameRoute);
-                                // }else{
-                                //   isLoading = false;
-                                //   //toast
-                                // }
-                              },
-                              child: Text(
-                                "LOGIN",
-                                style: button1,
+                                ],
                               ),
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      const BorderRadius.all(Radius.circular(20)),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      spreadRadius: 0,
+                                      blurRadius: 1,
+                                    )
+                                  ]),
                             ),
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(100)),
-                              gradient: gradientBackgroundColor,
+                            const SizedBox(
+                              height: 17,
                             ),
-                          ),
-                          const SizedBox(
-                            height: 17,
-                          ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 27),
-                            width: 10000,
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushNamed(RegisterPage.nameRoute);
-                              },
-                              child: Text(
-                                "Register",
-                                style: button2,
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 27),
+                              width: 10000,
+                              child: TextButton(
+                                onPressed: () async {
+                                  isLoading = true;
+                                  await loginUser( emailController.text, passController.text);
+                                  SharedPreferences sharedpreferences = await SharedPreferences.getInstance();
+                                  isLoading =false;
+                                  if (_formKey.currentState!.validate() && sharedpreferences.getString('token')!= null) {
+                                    Navigator.of(context).pushReplacementNamed(HomePage.nameRoute);
+                                  }else{
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(content: Text('Gagal Masuk')),
+                                    );
+                                  }
+                                  // if(sharedpreferences.getString('token') != null){
+                                  //   Navigator.of(context).pushReplacementNamed(HomePage.nameRoute);
+                                  // }else{
+                                  //   isLoading = false;
+                                  //   //toast
+                                  // }
+                                },
+                                child: Text(
+                                  "LOGIN",
+                                  style: button1,
+                                ),
                               ),
-                            ),
-                            decoration: BoxDecoration(
+                              decoration: BoxDecoration(
                                 borderRadius:
                                     const BorderRadius.all(Radius.circular(100)),
-                                border: Border.all(
-                                  color: borderColor,
-                                  width: 3,
-                                )),
-                          ),
-                        ],
-                      ),
+                                gradient: gradientBackgroundColor,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 17,
+                            ),
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 27),
+                              width: 10000,
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.of(context)
+                                      .pushNamed(RegisterPage.nameRoute);
+                                },
+                                child: Text(
+                                  "Register",
+                                  style: button2,
+                                ),
+                              ),
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      const BorderRadius.all(Radius.circular(100)),
+                                  border: Border.all(
+                                    color: borderColor,
+                                    width: 3,
+                                  )),
+                            ),
+                          ],
+                        ),
+                ),
               ),
             ),
           )
